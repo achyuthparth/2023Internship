@@ -1,16 +1,11 @@
-import json 
+import json
 import numpy as np
 import requests
 from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 
-sampleDict = { "startAddress": { "id": 13, "addressLine1": "1600 Amphitheatre Parkway", "addressLine2": "Mountain View", "city": "CA", "state": "US", "zipcode": 94043 }, "addresses": [ { "id": 14, "addressLine1": "1 Infinite Loop", "addressLine2": "Cupertino", "city": "CA", "state": "US", "zipcode": 95014 }, { "id": 15, "addressLine1": "1000 Oracle Parkway", "addressLine2": "Redwood Shores", "city": "CA", "state": "US", "zipcode": 94065 }, { "id": 16, "addressLine1": "6000 Bayfront Expressway", "addressLine2": "San Jose", "city": "CA", "state": "US", "zipcode": 95113 }, { "id": 17, "addressLine1": "101 California Street", "addressLine2": "San Francisco", "city": "CA", "state": "US", "zipcode": 94111 }, { "id": 18, "addressLine1": "701 Van Ness Avenue", "addressLine2": "San Francisco", "city": "CA", "state": "US", "zipcode": 94102 } ] } 
+#sampleDict = { "startAddress": { "id": 13, "addressLine1": "1600 Amphitheatre Parkway", "addressLine2": "Mountain View", "city": "CA", "state": "US", "zipcode": 94043 }, "addresses": [ { "id": 14, "addressLine1": "1 Infinite Loop", "addressLine2": "Cupertino", "city": "CA", "state": "US", "zipcode": 95014 }, { "id": 15, "addressLine1": "1000 Oracle Parkway", "addressLine2": "Redwood Shores", "city": "CA", "state": "US", "zipcode": 94065 }, { "id": 16, "addressLine1": "6000 Bayfront Expressway", "addressLine2": "San Jose", "city": "CA", "state": "US", "zipcode": 95113 }, { "id": 17, "addressLine1": "101 California Street", "addressLine2": "San Francisco", "city": "CA", "state": "US", "zipcode": 94111 }, { "id": 18, "addressLine1": "701 Van Ness Avenue", "addressLine2": "San Francisco", "city": "CA", "state": "US", "zipcode": 94102 } ] } 
 
-def createAddressList(dictionary = sampleDict):
-    addressList = []
-    addressList[0] = f"{dictionary["startAddress"]}"
-    for address in dictionary["addresses"]
-    
 API_KEY = "AIzaSyA1SLSrQuMk74VCC--Nz8ACjBdTJirIej8"
 def createURL(addressList = []):
     queryList = ""
@@ -47,7 +42,7 @@ def create_data_model(addressList = [[]]):
 
 
 data = create_data_model(addressList = ["Lexington, MA, USA", "Cambridge, MA, USA", "Concorde, MA, USA"])
-manager = pywrapcp.RoutingIndexManager(len(data["distance_matrix"]), data["num_vehicles"], data ["depot"])
+manager = pywrapcp.RoutingIndexManager(len(data["distance_matrix"]), data["num_vehicles"], data["depot"])
 routing = pywrapcp.RoutingModel(manager)
 
 def distance_callback(fromIndex, toIndex):
@@ -75,21 +70,14 @@ def print_solution(manager, routing, solution):
     return (plan_output)
     #plan_output += 'Route distance: {}miles\n'.format(route_distance)
     
-solution = routing.SolveWithParameters(search_parameters)
-if solution:
+if solution := routing.SolveWithParameters(search_parameters):
     returnList = print_solution(manager, routing, solution)
 
-returnDict = {}
-returnDict["Order"] = []
+returnDict = {"Order": []}
 for k,element in enumerate(returnList):
     if k > 0:
         time = data["distance_matrix"][k - 1][k - 2]
     else: time = data["distance_matrix"][0][0]
     returnDict["Order"].append({"ID": returnList[k], "Time": time})
 
-
-
-'''
-if __name__ == "__main__":
-    def returnDict():
-        return returnDict'''
+print(returnDict)
