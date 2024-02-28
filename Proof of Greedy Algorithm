@@ -1,0 +1,10 @@
+There are N agents M customers.
+Suppose we cluster the customers by proximity to the nearest agent to create N clusters.
+> How do I prove that clustering by proximity will make the travel time the least?
+Suppose that there exists an algorithm which will optimize the travel path within a cluster.
+> How do I prove traveling salesman with convex hull?
+Since the travel time is dependent on the distance between stops, we can assume that the total cost of travel is minimized.
+> How do I prove that travel time is dependent between stops for the agent?
+
+
+Assume proximity clustering will lead to least travel time for agent.
