@@ -1,10 +1,28 @@
 There are N agents M customers.
 Suppose we cluster the customers by proximity to the nearest agent to create N clusters.
+
 > How do I prove that clustering by proximity will make the travel time the least?
 If there are 3 stops, and the distance between the first two is lesser than the distance between the second two, then the travel between the second and third stop will be shorter.
 Assume this is true for k stops.
-If there are k, of which
-
+Supposed there are k+1 stops. 
+Within the first k stops there is a length L which is the shortest travel time within the first k stops.
+If the kth stop and the (k+1)th stop have a distance P which is greater than L, then L is the lowest travel cost.
+This implies that clustering by proximity will result in lesser travel cost, as the distance to travel is lowest.
 
 Suppose that there exists an algorithm which will optimize the travel path within a cluster.
-> How do I prove traveling salesman with convex hull?
+
+> How do I prove traveling salesman with nearest neighbor?
+Suppose there are 3 stops A B C. A to B is closest, A to C is farthest, B to C is in the middle.
+By triangle inequality, if the agent starts at A, traveling to B then to C is faster than A to C then to B.
+If there are k stops, then there are k neighbors to the agent.
+By first visiting the nearest neighbor, the agent will have a total travel time less than that of visiting the second nearest neighbor.
+The second is better than the third, and so on and so forth until the kth nearest neighbor.
+Suppose the agent has visited the nearest stop. There are now k-1 stops to visit.
+We can then visit the nearest neighbor, as going elsewhere first will incur greater cost than to visit nearest neighbor.
+Therefore, nearest neighbor is an optimized route for the traveling agent.
+
+If we move one customer from Agent[1] to Agent[2], the travel cost would have changed for Agent 1 and Agent 2, as well as the total cost of all agents.
+
+> How do I prove that moving the customer nearest to Agent 2 is the best option?
+
+After moving, if the total time for all agents has not increased, then the move either makes no difference or improves the total time.
